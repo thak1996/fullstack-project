@@ -1,13 +1,27 @@
+# Dockerfile para Backend
+
 FROM node:18
+
+# Definir diretório de trabalho
 WORKDIR /app
-RUN mkdir -p /app/node_modules/.cache && \
-    chown -R node:node /app
-USER node
-COPY --chown=node:node package*.json ./
+
+# Criar diretório de cache
+RUN mkdir -p /app/node_modules/.cache
+
+# Copiar arquivos de dependências e instalar
+COPY package*.json ./
 RUN yarn install && \
     yarn add dotenv && \
     yarn add -D @types/express @types/cors @types/node
-COPY --chown=node:node . .
+
+# Copiar o restante do código
+COPY . .
+
+# Compilar TypeScript
 RUN yarn tsc
+
+# Expor a porta necessária
 EXPOSE 8080
+
+# Comando para iniciar a aplicação
 CMD ["yarn", "dev"]
