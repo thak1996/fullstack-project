@@ -1,7 +1,13 @@
-FROM node:16
+FROM node:18
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
+RUN mkdir -p /app/node_modules/.cache && \
+    chown -R node:node /app
+USER node
+COPY --chown=node:node package*.json ./
+RUN yarn install && \
+    yarn add dotenv && \
+    yarn add -D @types/express @types/cors @types/node
+COPY --chown=node:node . .
+RUN yarn tsc
 EXPOSE 8080
-CMD ["npx", "ts-node-dev", "--respawn", "src/index.ts"]
+CMD ["yarn", "dev"]

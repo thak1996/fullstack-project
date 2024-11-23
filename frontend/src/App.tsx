@@ -8,19 +8,19 @@ const App = () => {
     });
 
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
-        
-        console.log('Tentando conectar em:', apiUrl);
+        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+
+        console.log("Tentando conectar em:", apiUrl);
 
         axios
             .get(apiUrl, {
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
                 }
             })
             .then((response) => {
-                console.log('Resposta recebida:', response.data);
+                console.log("Resposta recebida:", response.data);
                 setMessage(response.data.message);
             })
             .catch((error) => {
@@ -39,11 +39,13 @@ const App = () => {
                     <h3>Erro de conexão</h3>
                     <p>{error.message}</p>
                     {error.details && (
-                        <pre style={{
-                            background: "#f8f8f8",
-                            padding: "10px",
-                            borderRadius: "4px"
-                        }}>
+                        <pre
+                            style={{
+                                background: "#f8f8f8",
+                                padding: "10px",
+                                borderRadius: "4px"
+                            }}
+                        >
                             {error.details}
                         </pre>
                     )}
