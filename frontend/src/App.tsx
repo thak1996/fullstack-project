@@ -1,58 +1,29 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import MessageDisplay from './components/MessageDisplay';
+import AppController from './controller/AppController';
+import Form from './components/Form'; // Importando o novo componente Form
 
 const App = () => {
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
     const [error, setError] = useState<{ message: string; details?: string }>({
-        message: ""
+        message: '',
     });
 
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8080";
+        const controller = new AppController();
+        const fetchData = async () => {
+            await controller.fetchMessage();
+            setMessage(controller.getMessage());
+            setError(controller.getError());
+        };
 
-        console.log("Tentando conectar em:", apiUrl);
-
-        axios
-            .get(apiUrl, {
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((response) => {
-                console.log("Resposta recebida:", response.data);
-                setMessage(response.data.message);
-            })
-            .catch((error) => {
-                console.error("Erro detalhado:", error);
-                setError({
-                    message: "Erro na conexão",
-                    details: `Erro ao conectar com ${apiUrl}: ${error.message}`
-                });
-            });
+        fetchData();
     }, []);
 
     return (
-        <div style={{ padding: "20px" }}>
-            {error.message ? (
-                <div style={{ color: "red" }}>
-                    <h3>Erro de conexão</h3>
-                    <p>{error.message}</p>
-                    {error.details && (
-                        <pre
-                            style={{
-                                background: "#f8f8f8",
-                                padding: "10px",
-                                borderRadius: "4px"
-                            }}
-                        >
-                            {error.details}
-                        </pre>
-                    )}
-                </div>
-            ) : (
-                <div>{message || "Aguarde, conectando ao servidor..."}</div>
-            )}
+        <div>
+            <Form /> {}
+            <MessageDisplay message={message} error={error} />
         </div>
     );
 };

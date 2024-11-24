@@ -21,8 +21,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "eslint . --ext .ts,.tsx",
-        "lint:fix": "eslint . --ext .ts,.tsx --fix"
+        "format": "prettier --write ."
     },
     "eslintConfig": {
         "extends": [
@@ -43,14 +42,9 @@
         ]
     },
     "devDependencies": {
+        "@babel/core": "^7.x.x",
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@types/aria-query": "^5.0.4",
-        "@typescript-eslint/eslint-plugin": "^5.62.0",
-        "@typescript-eslint/parser": "^5.62.0",
-        "eslint": "^8.42.0",
-        "eslint-plugin-react": "^7.37.2",
-        "eslint-plugin-react-hooks": "^5.0.0",
-        "@babel/core": "^7.x.x",
         "@types/babel__core": "^7.x.x",
         "@types/babel__generator": "^7.x.x",
         "@types/babel__template": "^7.x.x",
@@ -68,6 +62,7 @@
         "@types/range-parser": "^1.x.x",
         "@types/serve-static": "^1.x.x",
         "@types/stack-utils": "^2.x.x",
-        "@types/testing-library__jest-dom": "^5.x.x"
+        "@types/testing-library__jest-dom": "^5.x.x",
+        "prettier": "^3.3.3"
     }
 }

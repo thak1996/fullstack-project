@@ -8,9 +8,9 @@ const app = express();
 console.log("🚀 Iniciando aplicação...");
 
 const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
     credentials: true,
     optionsSuccessStatus: 200
 };
@@ -37,7 +37,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.get("/", (req: Request, res: Response) => {
     console.log("✅ Rota / acessada com sucesso");
-    res.json({ message: "Hello from backend!" });
+    res.json({ message: "Hello from backend NEW THAK !" });
 });
 
 // Log de erros com tipagem correta
